@@ -41,55 +41,27 @@ function Circle(radios){
         y:0
     }
 
+    // getter to acces to defaultLocation 
+
     this.getDefaultLocation = function (){
         return defaultLocation
     };
 
+    //this function would be call when I access the object
+    Object.defineProperty(this, 'defaultLocation', {
+        get: function(){
+            return defaultLocation;
+        },
+        set: function(value){
+            if (!value.x || !value.y)
+                throw new Error("Invalid Location")
+                
+            defaultLocation = value
+        }
+    })
+
 }
-
-
-
 const ConstructureCircle = new Circle(3)
 
-//Add Methos to the object:
-
-ConstructureCircle.location = {x:1};
-ConstructureCircle['location'] = {y:3}
-
-delete ConstructureCircle['location']
-
-////////////Enumerate //////////////////////////////////////
-
-for(let key in ConstructureCircle){
-        console.log(key, ConstructureCircle[key]);
-}
-
-const keys = Object.keys(ConstructureCircle);
-console.log(keys);
-
-if('radios' in ConstructureCircle)
-    console.log('Circle has a radius. ');
-
-console.log(ConstructureCircle);
-
-ConstructureCircle.draw();
-
-
-// Primitives Vs Objets //////////////////////////////////////////////////////////////
-let x = {value : 10};
-
-let y = x;
-
-x.value = 20 
-
-
-
-let obj = {value: 10}
-
-function increase(obj) {
-    obj.value++
-}
-
-increase(obj);
-console.log(obj);
+ConstructureCircle.defaultLocation = 0 ;
 
